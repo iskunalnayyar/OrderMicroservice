@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 @Slf4j
 public class ItemController {
 
@@ -53,6 +54,7 @@ public class ItemController {
     @GetMapping("/items")
     public List<Item> findAllItems() {
         log.info("Inside findAllItems method of ItemController");
+
         return itemService.getAllItems();
     }
 

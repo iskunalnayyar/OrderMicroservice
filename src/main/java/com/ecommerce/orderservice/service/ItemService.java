@@ -19,22 +19,27 @@ public class ItemService {
     private ItemRepository itemRepository;
 
     public List<Item> findItemsByOrderId(Long orderId) {
+        log.info("Inside of findItemsByOrderId of ItemService");
         return itemRepository.findByOrder(orderId);
     }
 
     public Item addItem(Item item) {
+        log.info("Inside of addItem of ItemService");
         return itemRepository.save(item);
     }
 
     public Optional<Item> findById(Long itemId) {
+        log.info("Inside of findById of ItemService");
         return itemRepository.findById(itemId);
     }
 
     public List<Item> getAllItems() {
+        log.info("Inside of getAllItems of ItemService");
         return (List<Item>) itemRepository.findAll();
     }
 
     public void deleteItem(Optional<Item> itemToBeDeleted) {
+        log.info("Inside of deleteItem of ItemService");
         itemRepository.delete(itemToBeDeleted.get());
         return;
     }

@@ -18,6 +18,7 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     public List<Order> getAllOrders() {
+        log.info("Inside of getAllOrders of OrderService");
         return (List<Order>) orderRepository.findAll();
     }
 
