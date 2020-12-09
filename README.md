@@ -3,7 +3,7 @@
 ### Database Schema
 
 - The schema provided was all in 1 table in the legacy schema, so I decided to make it Normalized, and divide up the data into its respective tables.
-- I split the schema into 5 tables (Order, Item, Billing_details, Shipping_details, Payment) with associations defined properly to meet the requirements and be a foundation for APIs.
+- I split the schema into 5 tables (Order, Item, Billing_details, Shipping_details, Payment) with associations defined properly to meet the requirements and be a foundation for the APIs.
 #### Order 
 - The first table is the `Order` table with Customer details (like `customer_name`, `customer_email`, `customer_address`), Order `status`, additional `notes`, system generated `created_date`, and `modified_date` as part of identifiable data and metadata living on the Order itself.
 - This `Order` table is connected to `Item` table in a 1-to-many relationship.
@@ -37,6 +37,7 @@
 
 ### Setup
 - Open this repository in your local IDE
+- Right click the root folder `order-service` in the IDE, go to `maven` then `download sources & documentation` to install dependencies
 - Update the username & password in the `application.properties` file.
 - Note the database name as `orderservicedb`
 - You will need to setup the database in your PostgreSQL instance
@@ -61,7 +62,7 @@
 - There is 1 microservice for **Order Processing** that allows RESTful clients to work with single order objects.
 
 - The layers in the application are as follows Controller uses Service layer, which connects to Repository layer that extends JPARepository
-- For simplicity purposes, I have implemented two controllers OrderController and ItemController and their respective service and repository classes. I added the functionality for items to give the user the ability to add/delete items from an order. This is an assumption, and can very well be refactored if needed.
+- For simplicity purposes, I have implemented two controllers OrderController and ItemController and their respective service and repository classes. I've added the functionality for items to give the user the ability to add/delete items from an order. This is an assumption, and can very well be refactored if needed.
 - A follow up would be to get requirements for a way to add items inside an Order, add Payment, Shipping and Billing Details for an item, and implement the design in that way.
 
 
