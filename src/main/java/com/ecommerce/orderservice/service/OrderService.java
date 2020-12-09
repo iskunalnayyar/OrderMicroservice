@@ -18,27 +18,28 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     public List<Order> getAllOrders() {
-        log.info("Inside of getAllOrders of OrderService");
+        log.info("Running getAllOrders from OrderService");
         return (List<Order>) orderRepository.findAll();
     }
 
     public Optional<Order> findByOrderId(Long orderId) {
-        log.info("Inside getOrderById of OrderService");
+        log.info("Running getOrderById from OrderService with orderId " + orderId);
         return orderRepository.findById(orderId);
     }
 
     public Order findByCustomerName(String customerName) {
-        log.info("Inside getOrderById of OrderService");
+        log.info("Running getOrderById from OrderService with customerName " + customerName);
         return orderRepository.findByCustomerName(customerName);
     }
+
     public Order saveOrder(Order order) {
-        log.info("Inside createOrder of OrderService");
+        log.info("Running createOrder from OrderService with order " + order.getCustomerId() + " & items " + order.getItems());
         setupOrder(order);
         return orderRepository.save(order);
     }
 
     public void deleteOrder(Optional<Order> order) {
-        log.info("Inside createOrder of OrderService");
+        log.info("Running createOrder from OrderService with order " + order.get().getCustomerId() + " & items " + order.get().getItems());
         orderRepository.delete(order.get());
         return;
     }
@@ -51,7 +52,7 @@ public class OrderService {
     }
 
     public void cancelOrder(Optional<Order> orderToBeCancelled) {
-        log.info("Inside cancelOrder of OrderService");
+        log.info("Running cancelOrder from OrderService with order to be cancelled " + orderToBeCancelled.get().getOrderId() + " & items " + orderToBeCancelled.get().getItems());
         orderToBeCancelled.get().setStatus("Cancelled");
         orderRepository.save(orderToBeCancelled.get());
     }
