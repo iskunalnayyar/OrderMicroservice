@@ -21,27 +21,27 @@ public class OrderController {
 
     @GetMapping("/orders")
     public List<Order> findAllOrders() {
-        log.info("Inside findAllOrders method of OrderController");
+        log.info("Running findAllOrders method from OrderController");
         return orderService.getAllOrders();
     }
 
     @GetMapping("/orders/{orderId}")
     public Optional<Order> findByOrderId(@PathVariable("orderId") Long orderId) throws Exception {
-        log.info("Inside getOrderById method of OrderController");
+        log.info("Running getOrderById method from OrderController with orderId " + orderId);
         Optional<Order> order = orderService.findByOrderId(orderId);
         return order;
     }
 
     @PostMapping("/orders/create")
     public Order createOrder(@RequestBody Order order) {
-        log.info("Inside createOrder method of OrderController");
+        log.info("Running createOrder method from OrderController with order " + order.getOrderId());
         return orderService.saveOrder(order);
     }
 
 
     @GetMapping("/orders/cancel/{orderId}")
     public String cancelOrder(@PathVariable("orderId") Long orderId) throws Exception {
-        log.info("Inside cancelOrder method of OrderController");
+        log.info("Running cancelOrder method from OrderController with orderId " + orderId);
 
         Optional<Order> orderToBeCancelled = orderService.findByOrderId(orderId);
         if (orderToBeCancelled.isPresent()) {
@@ -52,7 +52,7 @@ public class OrderController {
 
     @GetMapping("/orders/delete/{orderId}")
     public String deleteOrder(@PathVariable("orderId") Long orderId) throws Exception {
-        log.info("Inside deleteOrder method of OrderController");
+        log.info("Running deleteOrder method from OrderController for " + orderId);
 
         Optional<Order> orderToBeDeleted = orderService.findByOrderId(orderId);
         if (orderToBeDeleted.isPresent()) {

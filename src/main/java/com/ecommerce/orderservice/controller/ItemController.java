@@ -25,14 +25,14 @@ public class ItemController {
 
     @GetMapping("/items/{orderId}")
     public List<Item> getItemsByOrderId(@PathVariable("orderId") Long orderId) {
-        log.info("Inside getItemsByOrderId method of ItemController");
+        log.info("Running getItemsByOrderId method from ItemController");
         return itemService.findItemsByOrderId(orderId);
     }
 
     @Transactional
     @PostMapping("/items/add/{orderId}")
     public Item addItemToOrder(@PathVariable("orderId") Long orderId, @RequestBody Item item) {
-        log.info("Inside addItem method of ItemController");
+        log.info("Running addItem method from ItemController");
         Optional<Order> order = orderRepository.findById(orderId);
         item.setOrder(order.get());
         return itemService.addItem(item);
@@ -41,7 +41,7 @@ public class ItemController {
 
     @GetMapping("/items/search/{itemId}")
     public Item getItem(@PathVariable("itemId") Long itemId) throws Exception {
-        log.info("Inside getItem method of ItemController");
+        log.info("Running getItem method from ItemController with itemId " + itemId);
 
         Optional<Item> optionalItem = itemService.findById(itemId);
         if (optionalItem.isPresent()) {
@@ -53,14 +53,14 @@ public class ItemController {
 
     @GetMapping("/items")
     public List<Item> findAllItems() {
-        log.info("Inside findAllItems method of ItemController");
+        log.info("Running findAllItems method from ItemController");
 
         return itemService.getAllItems();
     }
 
     @GetMapping("/items/delete/{itemId}")
     public String deleteItem(@PathVariable("itemId") Long itemId) throws Exception {
-        log.info("Inside deleteOrder method of ItemController");
+        log.info("Running deleteOrder method from ItemController for itemId " + itemId);
 
         Optional<Item> itemToBeDeleted = itemService.findById(itemId);
         if (itemToBeDeleted.isPresent()) {
