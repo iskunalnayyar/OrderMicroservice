@@ -24,7 +24,7 @@
 - Stores details of the address the order is to shipped at using fields like `address_line_1`, `address_line_2`, `state`, `city`, `zipcode`.
 - We can add a functionality to keep this the same as the billing address or vice versa as an added feature in the future.
 
- ![](.README_images/ER Model.png)
+<img width="860" alt="Screen Shot 2020-12-09 at 1 50 26 AM" src="https://user-images.githubusercontent.com/47041461/101615138-a2a39400-39c2-11eb-85f9-bef75907f6ec.png">
  
   
 ### Installations
@@ -60,11 +60,8 @@
 - Database schema section talks about how the database requirements are met, let's talk about the microservice.
 - There is 1 microservice for **Order Processing** that allows RESTful clients to work with single order objects.
 
-
-
-- The layers in the application are as follows OrderController, OrderService layer, which connects to OrderRepository layer that extends JPARepository
-- For simplicity purposes, I have also implemented the same logic for items, and given the user the ability to add/delete items from an order. For this we have ItemController with the endpoints, 
-accessing ItemService layer, that manages through ItemRepository as well as OrderRepository.
+- The layers in the application are as follows Controller uses Service layer, which connects to Repository layer that extends JPARepository
+- For simplicity purposes, I have implemented two controllers OrderController and ItemController and their respective service and repository classes. I added the functionality for items to give the user the ability to add/delete items from an order. This is an assumption, and can very well be refactored if needed.
 - A follow up would be to get requirements for a way to add items inside an Order, add Payment, Shipping and Billing Details for an item, and implement the design in that way.
 
 
@@ -126,26 +123,34 @@ accessing ItemService layer, that manages through ItemRepository as well as Orde
     
 }
 ```
+
 - AddItemToOrder
-![](.README_images/add-item-to-order.png)
+
+![add-item-to-order](https://user-images.githubusercontent.com/47041461/101615656-3b3a1400-39c3-11eb-9972-7e0b0c7f6531.png)
 
 - GetAllOrders
-![](.README_images/get-all-orders.png)
+
+![get-all-orders](https://user-images.githubusercontent.com/47041461/101615660-3c6b4100-39c3-11eb-8d5a-076e0e7d0464.png)
 
 - GetAllItems
-![](.README_images/get-all-items.png)
+
+![get-all-api-items](https://user-images.githubusercontent.com/47041461/101615653-3aa17d80-39c3-11eb-893e-88779bf9c6d0.png)
 
 - DeleteItemById
-![](.README_images/delete-item-3.png)
+
+![delete-item-id-3](https://user-images.githubusercontent.com/47041461/101615644-383f2380-39c3-11eb-8407-aca138e61c2a.png)
 
 - CancelOrderById
-![](.README_images/cancel-order.png)
+
+<img width="1369" alt="Screen Shot 2020-12-08 at 8 03 03 PM" src="https://user-images.githubusercontent.com/47041461/101615864-7c322880-39c3-11eb-845a-0f9785fbb6e2.png">
 
 - Check Cancelled order by using GetAllOrders
-![](.README_images/show-cancelled-order.png)
+
+<img width="1347" alt="Screen Shot 2020-12-08 at 8 03 30 PM" src="https://user-images.githubusercontent.com/47041461/101615914-8eac6200-39c3-11eb-9e26-ebfb2c80ba28.png">
+
 - GetApiDocumentation:
     - Sends a GET request to http://localhost:8080/v2/api-docs to get the Swagger generated documentation.
-    - An example of a CreateOrder endoint as described by Swagger.
+    - An example of a CreateOrder endpoint as described by Swagger.
     ```
   "/api/orders/create": {
               "post": {
@@ -198,9 +203,14 @@ accessing ItemService layer, that manages through ItemRepository as well as Orde
     
     
 - You can also test the local PostgreSQL database. Here are a few query results: 
-![](.README_images/table-definitions.png)
-![](.README_images/select-orderss.png)
-![](.README_images/select-items.png)
+
+
+
+![initialize-db](https://user-images.githubusercontent.com/47041461/101616137-d7fcb180-39c3-11eb-8086-bd4f5dd4582f.png)
+
+![3](https://user-images.githubusercontent.com/47041461/101616244-01b5d880-39c4-11eb-9f16-b5e823ae7ad7.png)
+
+![2](https://user-images.githubusercontent.com/47041461/101616245-024e6f00-39c4-11eb-9ad2-155a11ef3158.png)
 
 
 ### API Documentation using Swagger UI
@@ -211,16 +221,15 @@ accessing ItemService layer, that manages through ItemRepository as well as Orde
 - Go to `http://localhost:8080/swagger-ui/` to view and test the API endpoints as shown below
  
 - There are 2 controllers wired up: 1 is the main one for Orders and the other is to manage Items
-![](.README_images/Swagger-UI-1.png)
 
- ![](.README_images/Order-API.png)A
- 
- ![](.README_images/Schema.png)
+!<img width="1245" alt="Screen Shot 2020-12-08 at 8 53 43 AM" src="https://user-images.githubusercontent.com/47041461/101616422-31fd7700-39c4-11eb-8fa0-22e609c6943a.png">
+<img width="1159" alt="Screen Shot 2020-12-08 at 8 53 58 AM" src="https://user-images.githubusercontent.com/47041461/101616431-345fd100-39c4-11eb-840c-13aa68030920.png">
+<img width="1222" alt="Screen Shot 2020-12-08 at 8 54 09 AM" src="https://user-images.githubusercontent.com/47041461/101616440-375ac180-39c4-11eb-971c-99b1cd71cfe3.png">
 
 - Here is the schema of the Data Models which show that we use entire objects to be sent to their parent class.
 - An order will have a List of Items, an Item will have an object of BillingDetails, ShippingDetails and a list of Payment objects.
 
-![](.README_images/Data Model Schema.png)
+<img width="913" alt="Screen Shot 2020-12-08 at 8 54 33 AM" src="https://user-images.githubusercontent.com/47041461/101616451-39bd1b80-39c4-11eb-8961-e502f4543f11.png">
 
 ### Unit & Integration Testing
 - I added some Unit and Integration tests to test the repository and service layers
